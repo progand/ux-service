@@ -13,6 +13,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
+    "deploy": "ember build -prod && firebase deploy",
     "test": "ember test"
   },
   "devDependencies": {
