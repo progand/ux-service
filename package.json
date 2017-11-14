@@ -13,6 +13,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
+    "deploy": "ember build -prod && firebase deploy",
     "test": "ember test"
   },
   "devDependencies": {
@@ -36,7 +37,8 @@
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.16.0",
     "ember-welcome-page": "^3.0.0",
-    "loader.js": "^4.2.3"
+    "loader.js": "^4.2.3",
+    "torii": "^0.9.6"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
