@@ -1785,7 +1785,7 @@ ember-cli-app-version@^3.0.0:
     ember-cli-babel "^6.8.0"
     git-repo-version "0.4.1"
 
-ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.0.0-beta.9, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2:
+ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.0.0-beta.9, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.9.0.tgz#5147391389bdbb7091d15f81ae1dff1eb49d71aa"
   dependencies:
@@ -5214,6 +5214,12 @@ to-array@0.1.4:
 to-fast-properties@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
+
+torii@^0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/torii/-/torii-0.9.6.tgz#311e79c5e80979e337754dfda7fd80e35a6347e0"
+  dependencies:
+    ember-cli-babel "^6.3.0"
 
 tough-cookie@~2.3.0:
   version "2.3.3"
