@@ -22,6 +22,14 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+    torii: {
+      providers: {
+        'google-oauth2': {
+          apiKey: "748085729435-euruio30dbp9k714kad5gkv7s0t09n8d.apps.googleusercontent.com",
+          redirectUri: "http://localhost:4200/oauth2callback"
+        }
+      }
     }
   };
 
