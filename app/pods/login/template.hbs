@@ -1,0 +1,12 @@
+<div>{{link-to "Home" "index"}}</div>
+
+{{#if authorization}}
+  Congrats! You've been authorized!
+  <div class="authorization-data">
+    {{authorizationData}}
+  </div>
+{{else}}
+  <a href="#" {{action 'signIn'}}>
+    Sign in via Google
+  </a>
+{{/if}}
