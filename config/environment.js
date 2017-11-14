@@ -53,6 +53,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.torii.providers['google-oauth2'].redirectUri = "https://test-my-ui.firebaseapp.com/oauth2callback"
     // here you can enable a production-specific feature
   }
 
