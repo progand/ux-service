@@ -4,7 +4,6 @@
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'ux-service',
-    podModulePrefix: 'ux-service/pods',
     environment,
     rootURL: '/',
     locationType: 'auto',
@@ -22,14 +21,6 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
-    torii: {
-      providers: {
-        'google-oauth2': {
-          apiKey: "748085729435-euruio30dbp9k714kad5gkv7s0t09n8d.apps.googleusercontent.com",
-          redirectUri: "http://localhost:4200/oauth2callback"
-        }
-      }
     }
   };
 
@@ -53,7 +44,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.torii.providers['google-oauth2'].redirectUri = "https://test-my-ui.firebaseapp.com/oauth2callback"
     // here you can enable a production-specific feature
   }
 
