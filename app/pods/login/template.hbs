@@ -1,12 +1,12 @@
-<div>{{link-to "Home" "index"}}</div>
+{{link-to "Home" "index" class="btn btn-default"}}
 
 {{#if authorization}}
   Congrats! You've been authorized!
-  <div class="authorization-data">
+  <pre class="authorization-data">
     {{authorizationData}}
-  </div>
+  </pre>
 {{else}}
-  <a href="#" {{action 'signIn'}}>
+  <a href="#" {{action 'signIn'}} class="btn btn-primary">
     Sign in via Google
   </a>
 {{/if}}
