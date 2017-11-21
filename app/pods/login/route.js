@@ -9,8 +9,9 @@ export default Route.extend(UnauthenticatedRouteMixin, {
 
   actions: {
     // action to trigger authentication with Google+
-    authenticateWithGooglePlus() {
-      this.get('session').authenticate('authenticator:torii', 'google-oauth2-bearer');
+    async authenticateWithGooglePlus() {
+      await this.get('session').authenticate('authenticator:torii', 'google-oauth2-bearer');
+      this.transitionTo('index');
     }
   }
 });

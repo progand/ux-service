@@ -30,12 +30,7 @@ module.exports = function(environment) {
           redirectUri: "http://localhost:4200/oauth2callback"
         }
       }
-    },
-    'ember-simple-auth': {
-      authenticationRoute: 'login',
-      routeAfterAuthentication: 'index',
-      routeIfAlreadyAuthenticated: 'index'
-    }
+    }  
   };
 
   if (environment === 'development') {
