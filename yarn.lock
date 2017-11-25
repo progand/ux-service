@@ -2529,6 +2529,13 @@ ember-cli-sri@^2.1.0:
   dependencies:
     broccoli-sri-hash "^2.1.0"
 
+ember-cli-string-helpers@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-string-helpers/-/ember-cli-string-helpers-1.5.0.tgz#b7c1b27ffd4bb4bf4846b3167f730f0125a96f44"
+  dependencies:
+    broccoli-funnel "^1.0.1"
+    ember-cli-babel "^6.3.0"
+
 ember-cli-string-utils@^1.0.0, ember-cli-string-utils@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ember-cli-string-utils/-/ember-cli-string-utils-1.1.0.tgz#39b677fc2805f55173735376fcef278eaa4452a1"
@@ -5356,6 +5363,12 @@ p-locate@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-locate/-/p-locate-2.0.0.tgz#20a0103b222a70c8fd39cc2e580680f3dde5ec43"
   dependencies:
     p-limit "^1.1.0"
+
+pagination-pager@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/pagination-pager/-/pagination-pager-3.1.0.tgz#a53fc09b517d0f82b98099957c82727a3552a10f"
+  dependencies:
+    ember-cli-babel "^5.1.7"
 
 parse-glob@^3.0.4:
   version "3.0.4"
