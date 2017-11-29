@@ -25,11 +25,19 @@ module.exports = function(environment) {
     },
     torii: {
       providers: {
-        'google-oauth2': {
-          apiKey: "748085729435-euruio30dbp9k714kad5gkv7s0t09n8d.apps.googleusercontent.com",
+        'google-oauth2-bearer': {
+          apiKey: "748085729435-loca6ip9ir7psprv463s48cr3jvmfs7a.apps.googleusercontent.com",
           redirectUri: "http://localhost:4200/oauth2callback"
         }
       }
+    },
+    firebase: {
+      apiKey: "AIzaSyAIkSbbzkF8TKJ4vVyo3KY_D5bI6n5UwzY",
+      authDomain: "test-my-ui.firebaseapp.com",
+      databaseURL: "https://test-my-ui.firebaseio.com",
+      projectId: "test-my-ui",
+      storageBucket: "test-my-ui.appspot.com",
+      messagingSenderId: "355805832589"
     }
   };
 
@@ -53,7 +61,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.torii.providers['google-oauth2'].redirectUri = "https://test-my-ui.firebaseapp.com/oauth2callback"
+    ENV.torii.providers['google-oauth2-bearer'].redirectUri = "https://test-my-ui.firebaseapp.com/oauth2callback"
     // here you can enable a production-specific feature
   }
 

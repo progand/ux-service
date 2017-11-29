@@ -1,0 +1,10 @@
+
+{{#each model as |response|}}
+    <div class="list-group">
+        <a href="#" class="list-group-item">   
+            <h4 class="list-group-item-heading">{{response.title}}</h4>
+            <p class="list-group-item-text">{{response.body}}</p>
+        </a>
+    </div>
+{{/each}}
+{{outlet}}

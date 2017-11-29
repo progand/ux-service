@@ -1,3 +1,29 @@
-<h1>UX service</h1>
+{{#bs-navbar type=(if inverse 'inverse') fluid=fluid collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    {{#link-to "index" class="navbar-brand" }}UX service{{/link-to}}
+  </div>
+  {{#navbar.content}}
+    {{#navbar.nav as |nav|}}
+      {{#nav.item}}
+        {{#nav.link-to "list-exercise"}}Exercise{{/nav.link-to}}
+      {{/nav.item}}
+      {{#nav.item}}
+        {{#nav.link-to "tasks"}}Tasks{{/nav.link-to}}
+      {{/nav.item}}
+    {{/navbar.nav}}
+    {{#navbar.nav class="navbar-right" as |nav|}}
+      {{#nav.item}}
+        {{#if session.isAuthenticated}}
+          <a {{action 'invalidateSession'}}>{{fa-icon "sign-out"}} Logout</a>
+        {{else}}
+          {{#nav.link-to "login"}}{{fa-icon "sign-in"}} Login{{/nav.link-to}}
+        {{/if}}
+      {{/nav.item}}
+    {{/navbar.nav}}
+  {{/navbar.content}}
+{{/bs-navbar}}
 
-{{outlet}}
+<div class="container-fluid">
+  {{outlet}}
+</div>

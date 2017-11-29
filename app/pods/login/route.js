@@ -1,14 +1,17 @@
+import {
+  inject as service
+} from '@ember/service';
 import Route from '@ember/routing/route';
+import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Route.extend({
+export default Route.extend(UnauthenticatedRouteMixin, {
+  session: service(),
+
   actions: {
-    signIn: function(){
-      var controller = this.controllerFor('login');
-      // The provider name is passed to `open`
-      this.get('torii').open('google-oauth2').then(function(authorization){
-        controller.set('authorization', authorization);
-        controller.set('authorizationData', JSON.stringify(authorization, null, 4));
-      });
+    // action to trigger authentication with Google+
+    async authenticateWithGooglePlus() {
+      await this.get('session').authenticate('authenticator:torii', 'google-oauth2-bearer');
+      this.transitionTo('index');
     }
   }
 });
