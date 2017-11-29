@@ -1,20 +1,31 @@
-<form class="form-inline" {{action (mut q) query on="submit"}}>
-  <div class="form-group">
-    <label class="sr-only" for="q">Search query:</label>
-    {{input value=query type="text" class="form-control" id="q" placeholder="Enter query here"}}
-  </div>
-  <button type="submit" class="btn btn-default">Search</button>
-</form>
-<hr/>
+<div class="container">
 
-{{#each model.items as |item|}}
-  <div class="list-group">
-    <a href="#" class="list-group-item">
-      <h4 class="list-group-item-heading">{{item.user.login}}</h4>
-      <p class="list-group-item-text">{{truncate item.body}}</p>
-    </a>
-  </div>
-{{/each}}
+  <form class="form-inline text-right m-b-md" {{action (mut q) query on="submit"}}>
+    <div class="form-group">
+      <label class="sr-only" for="q">Search query:</label> {{input value=query type="text" class="form-control" id="q" placeholder="Enter query here"}}
+    </div>
+    <button type="submit" class="btn btn-default">Search</button>
+  </form>
 
-{/* https://emberobserver.com/addons/pagination-pager */}
-{{pagination-pager count=model.total_count current=page change=(action (mut page))}}
+  <div class="m-b-lg">
+    {{outlet}}
+  </div>
+
+  {{#unless model.items.length}}
+    <div class="alert alert-info m-t-md">No tasks so far.</div>
+  {{/unless}}
+
+  {{#each model.items as |item|}}
+    <div class="list-group m-t-md">
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">{{item.title}}</h4>
+        <p class="list-group-item-text">{{truncate item.text}}</p>
+      </a>
+    </div>
+  {{/each}}
+
+  {{! https://emberobserver.com/addons/pagination-pager }}
+  {{pagination-pager count=model.total_count current=page change=(action (mut page))}}
+
+
+</div>

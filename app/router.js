@@ -9,7 +9,9 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('login');
   this.route('list-exercise');
-  this.route('tasks');
+  this.route('tasks', function() {
+    this.route('new');
+  });
 });
 
 export default Router;
