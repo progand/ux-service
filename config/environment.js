@@ -30,7 +30,15 @@ module.exports = function(environment) {
           redirectUri: "http://localhost:4200/oauth2callback"
         }
       }
-    }  
+    },
+    firebase: {
+      apiKey: "AIzaSyAIkSbbzkF8TKJ4vVyo3KY_D5bI6n5UwzY",
+      authDomain: "test-my-ui.firebaseapp.com",
+      databaseURL: "https://test-my-ui.firebaseio.com",
+      projectId: "test-my-ui",
+      storageBucket: "test-my-ui.appspot.com",
+      messagingSenderId: "355805832589"
+    }
   };
 
   if (environment === 'development') {
