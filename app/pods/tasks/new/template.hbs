@@ -1,0 +1,13 @@
+<h4>New task</h4>
+<form action="" {{action "submit" title text on="submit"}}>
+  <div class="form-group">
+    <label for="title">Title</label>
+    {{input value=title class="form-control" id="title" placeholder="Title"}}
+  </div>
+  <div class="form-group">
+    <label for="text">Text</label>
+    {{textarea value=text class="form-control" id="text" placeholder="Text"}}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit task</button>
+  {{#link-to "tasks" class="btn btn-link"}}Cancel{{/link-to}}
+</form>
