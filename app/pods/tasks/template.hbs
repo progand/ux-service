@@ -1,13 +1,13 @@
 <div class="container">
 
-  <form class="form-inline text-right m-b-md" {{action (mut q) query on="submit"}}>
+  <form class="form-inline m-b-lg" {{action (mut q) query on="submit"}}>
     <div class="form-group">
       <label class="sr-only" for="q">Search query:</label> {{input value=query type="text" class="form-control" id="q" placeholder="Enter query here"}}
     </div>
     <button type="submit" class="btn btn-default">Search</button>
   </form>
 
-  <div class="m-b-lg">
+  <div class="p-t-lg m-b-lg">
     {{outlet}}
   </div>
 
