@@ -11,7 +11,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
     // action to trigger authentication with Google+
     async authenticateWithGooglePlus() {
       await this.get('session').authenticate('authenticator:custom');
-      this.transitionTo('index');
+      this.transitionTo('tasks');
     }
   }
 });
