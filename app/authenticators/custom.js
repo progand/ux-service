@@ -19,8 +19,4 @@ export default Base.extend({
   restore(data) {
     return EmberPromise.resolve(data);
   },
-
-  fetch(data) {
-    return EmberPromise.resolve(data);
-  }
 });
