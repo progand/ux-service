@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('list-exercise');
   this.route('tasks', function() {
     this.route('new');
+    this.route('detail', {path: 'detail/:item_id'});
   });
 });
 
