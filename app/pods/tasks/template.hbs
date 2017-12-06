@@ -1,34 +1,3 @@
 <div class="container">
-
-  <form class="form-inline m-b-lg" {{action (mut q) query on="submit"}}>
-    <div class="form-group">
-      <label class="sr-only" for="q">Search query:</label> {{input value=query type="text" class="form-control" id="q" placeholder="Enter query here"}}
-    </div>
-    <button type="submit" class="btn btn-default">Search</button>
-  </form>
-
-  <div class="p-t-lg m-b-lg">
     {{outlet}}
-  </div>
-
-  {{#unless model.length}}
-    <div class="alert alert-info m-t-md">No tasks so far.</div>
-  {{/unless}}
-
-    {{#each model as |item|}}
-     {{#link-to 'tasks.detail' item.id}}
-      <div class="list-group m-t-md">
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">{{item.title}}</h4>
-          <p class="list-group-item-text">{{truncate item.text}}</p>
-        </a>  
-      </div>
-      {{/link-to}}
-    {{/each}}
-    
-
-  {{! https://emberobserver.com/addons/pagination-pager }}
-  {{pagination-pager count=model.total_count current=page change=(action (mut page))}}
-
-
 </div>

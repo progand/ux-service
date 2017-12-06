@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:tasks', 'Unit | Controller | tasks', {
+moduleFor('controller:tasks/index', 'Unit | Controller | tasks/index', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
