@@ -23,7 +23,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-    torii: {      
+    torii: {
     },
     firebase: {
       apiKey: "AIzaSyAIkSbbzkF8TKJ4vVyo3KY_D5bI6n5UwzY",
@@ -55,7 +55,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.torii.providers['google-oauth2-bearer'].redirectUri = "https://test-my-ui.firebaseapp.com/oauth2callback"
     // here you can enable a production-specific feature
   }
 
