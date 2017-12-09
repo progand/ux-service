@@ -4,16 +4,16 @@
 </ol>
 
 <h4>New task</h4>
-<form action="" {{action "submit" title text on="submit"}} class="p-b-lg">
+<form action="" {{action "submit" title text minAge maxAge on="submit"}} class="p-b-lg">
   <div class="form-group">
     <label for="title">Title</label>
     {{input value=title class="form-control" id="title" placeholder="Title"}}
   </div>
   <div class="form-group">
     <label for="minAge">minAge</label>
-    {{input value=minAge type="number" class="" id="minAge" placeholder="21"}}
+    {{input value=minAge type="number" class="" id="minAge" placeholder="0"}}
     <label for="maxAge">maxAge</label>
-    {{input value=maxAge type="number" class="" id="maxAge" placeholder="44"}}
+    {{input value=maxAge type="number" class="" id="maxAge" placeholder="100"}}
    </div>
   <div class="form-group">
     <label for="text">Text</label>
