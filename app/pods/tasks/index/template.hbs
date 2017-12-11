@@ -32,3 +32,9 @@
     </div>
   {{/link-to}}
 {{/each}}
+
+{{#if canShowMore}}
+  <div class="text-center">
+    <button class="btn btn-primary" {{action "showMore"}}>Show more</button>
+  </div>
+{{/if}}

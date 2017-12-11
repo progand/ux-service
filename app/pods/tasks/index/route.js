@@ -11,13 +11,21 @@ export default Route.extend({
     }
   },
 
-  model() {
-    return this.store.findAll('task');
+  model(params) {
+    return this.store.query('task', {
+      limitToFirst: params.page * 5
+    });
   },
 
   // setup initial `query` value
   setupController(controller) {
     this._super(...arguments);
     controller.set('query', controller.get('q'));
+  },
+
+  actions:{
+    showMore(){
+      this.controller.incrementProperty('page', 1);
+    }
   }
 });
