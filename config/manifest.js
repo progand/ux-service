@@ -21,7 +21,7 @@ module.exports = function(/* environment, appConfig */) {
       }))
     ],
     ms: {
-      tileColor: '#fff'
+      tileColor: '#EB6864'
     }
   };
 }
