@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import Ember from 'ember';
 
 export default Route.extend({
   resetController(controller, isExiting) {
@@ -21,6 +22,9 @@ export default Route.extend({
         });
         task.save().then(() => this.transitionTo("tasks.index"));
       }
+    },
+    changedAction: function(value) {
+      Ember.debug( "New slider value: %@".fmt( value ) );
     }
   }
 });
