@@ -14,7 +14,18 @@ module.exports = function(defaults) {
 			plugins: [
 				'transform-object-rest-spread'
 			]
-		}
+		},
+    'ember-cli-image-transformer': {
+      images: [
+        {
+          inputFilename: 'lib/images/brand-icon.svg',
+          outputFileName: 'appicon-',
+          convertTo: 'png',
+          destination: 'assets/icons/',
+          sizes: [32, 192, 280, 512]
+        }
+      ]
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
