@@ -1,14 +1,13 @@
 import Route from '@ember/routing/route';
-import Ember from 'ember';
 
 export default Route.extend({
   resetController(controller, isExiting) {
     if (isExiting) {
       // isExiting would be false if only the route's model was changing
       controller.set('title', '');
+      controller.set('text', '');
       controller.set('minAge', 0);
       controller.set('maxAge', 100);
-      controller.set('text', '');
     }
   },
   actions: {
@@ -22,9 +21,6 @@ export default Route.extend({
         });
         task.save().then(() => this.transitionTo("tasks.index"));
       }
-    },
-    changedAction: function(value) {
-      Ember.debug( "New slider value: %@".fmt( value ) );
     }
   }
 });
