@@ -18,7 +18,7 @@
     <div class="m-b-md">
       {{input value=minAge type="number" class="" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT}} - {{input value=maxAge type="number" class="" id="max age" placeholder="100" min="0" max=AGE_LIMIT}} years
     </div>
-    {{range-slider start=start range=range connect=true step=1 on-update="changeAgeRange"}}
+    {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
   </div>
   <div class="m-t-lg">
     <button type="submit" class="btn btn-primary">Submit task</button>
