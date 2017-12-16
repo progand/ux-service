@@ -16,7 +16,10 @@
   <div class="form-group age">
     <label for="minAge">Age range</label>
     <div class="m-b-md">
-      {{input value=minAge type="number" class="" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT}} - {{input value=maxAge type="number" class="" id="max age" placeholder="100" min="0" max=AGE_LIMIT}} years
+      {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
+      -
+      {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
+      years
     </div>
     {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
   </div>

@@ -1,0 +1,12 @@
+.task-form {
+  .age {
+    input[type="number"] {
+      display: inline-block;
+      width: 5em;
+    }
+
+    .noUi-target {
+      margin: 0 16px;
+    }
+  }
+}

@@ -21,6 +21,9 @@ export default Controller.extend({
         minAge: Math.floor(value[0]),
         maxAge: Math.floor(value[1])
       }));
+    },
+    ageRangeDidChange(){
+      later(() => this.set('start', [this.get('minAge'), this.get('maxAge')]));
     }
   }
 });
