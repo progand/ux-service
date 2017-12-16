@@ -9,7 +9,7 @@
   <button type="submit" class="btn btn-default">Search</button>
 </form>
 
-<div class="text-right">
+<div class="text-right m-b-lg">
   {{#link-to "tasks.new" class="btn btn-primary" }}{{fa-icon "plus"}} Add task{{/link-to}}
 </div>
 
@@ -18,19 +18,18 @@
 {{/unless}}
 
 {{#each model as |item|}}
-  {{#link-to 'tasks.detail' item.id}}
-    <div class="list-group m-t-md">
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{{item.title}}</h4>
-        <p class="list-group-item-text">{{truncate item.text}}</p>
-        {{#if (or item.minAge item.maxAge)}}
-          <div>
-            <span class="badge">{{age-range item.minAge item.maxAge}} years</span>
-          </div>
-        {{/if}}
-      </a>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{#link-to 'tasks.detail' item.id class="pull-right" }}{{fa-icon 'chevron-circle-down'}}{{/link-to}}
+      <h3 class="panel-title">{{#link-to 'tasks.detail' item.id}}{{item.title}}{{/link-to}}</h3>
     </div>
-  {{/link-to}}
+    <div class="panel-body">
+      {{truncate item.text}}
+    </div>
+    {{#if (or item.minAge item.maxAge)}}
+      <div class="panel-footer">{{age-range item.minAge item.maxAge}} years</div>
+    {{/if}}
+  </div>
 {{/each}}
 
 {{#if canShowMore}}

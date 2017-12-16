@@ -1,24 +1,30 @@
 <ol class="breadcrumb">
-  <li>{{#link-to "tasks.index"}}Tasks{{/link-to}}</li>
+  <li>
+    {{#link-to "tasks.index"}}Tasks{{/link-to}}
+  </li>
   <li class="active">New</li>
 </ol>
 
 <h4>New task</h4>
-<form action="" {{action "submit" title text minAge maxAge on="submit"}} class="p-b-lg">
+<form action="" {{action "submit" title text minAge maxAge on="submit"}} class="p-b-lg task-form">
   <div class="form-group">
-    <label for="title">Title</label>
-    {{input value=title class="form-control" id="title" placeholder="Title"}}
+    <label for="title">Title</label> {{input value=title class="form-control" id="title" placeholder="Title" required=true}}
   </div>
   <div class="form-group">
-    <label for="minAge">minAge</label>
-    {{input value=minAge type="number" class="" id="minAge" placeholder="0"}}
-    <label for="maxAge">maxAge</label>
-    {{input value=maxAge type="number" class="" id="maxAge" placeholder="100"}}
-   </div>
-  <div class="form-group">
-    <label for="text">Text</label>
-    {{textarea value=text class="form-control" id="text" placeholder="Text"}}
+    <label for="text">Text</label> {{textarea value=text class="form-control" id="text" placeholder="Text" required=true}}
   </div>
-  <button type="submit" class="btn btn-primary">Submit task</button>
-  {{#link-to "tasks" class="btn btn-link"}}Cancel{{/link-to}}
+  <div class="form-group age">
+    <label for="minAge">Age range</label>
+    <div class="m-b-md">
+      {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
+      -
+      {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
+      years
+    </div>
+    {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
+  </div>
+  <div class="m-t-lg">
+    <button type="submit" class="btn btn-primary">Submit task</button>
+    {{#link-to "tasks" class="btn btn-link" }}Cancel{{/link-to}}
+  </div>
 </form>

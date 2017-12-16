@@ -43,7 +43,15 @@ module.exports = function(defaults) {
   app.import({
     development: "node_modules/css-spaces/dist/spaces.bootstrap.css",
     production: "node_modules/css-spaces/dist/spaces.bootstrap.min.css"
-  })
+  });
+  /*app.import({
+    development: "node_modules/nouislider/distribute/nouislider.css",
+    production: "node_modules/nouislider/distribute/nouislider.min.css"
+  });
+  app.import({
+    development: "node_modules/nouislider/distribute/nouislider.js",
+    production: "node_modules/nouislider/distribute/nouislider.min.css"
+  })*/
 
   return app.toTree();
 };

@@ -5,9 +5,9 @@ export default Route.extend({
     if (isExiting) {
       // isExiting would be false if only the route's model was changing
       controller.set('title', '');
-      controller.set('minAge', 0);
-      controller.set('maxAge', 100);
       controller.set('text', '');
+      controller.set('minAge', 0);
+      controller.set('maxAge', controller.AGE_LIMIT);
     }
   },
   actions: {
@@ -16,8 +16,8 @@ export default Route.extend({
         const task = this.store.createRecord('task', {
           title,
           text,
-          minAge,
-          maxAge
+          minAge: minAge || undefined,
+          maxAge: maxAge < this.controller.AGE_LIMIT ? maxAge : undefined
         });
         task.save().then(() => this.transitionTo("tasks.index"));
       }

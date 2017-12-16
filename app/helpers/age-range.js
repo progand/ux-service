@@ -5,9 +5,9 @@ export function ageRange(params/*, hash*/) {
   if(min && max){
     return min + ' - ' + max;
   } else if(min){
-    return ' > ' + min;
+    return ' from ' + min;
   } else if(max){
-    return ' < ' + max;
+    return ' to ' + max;
   }
 }
 
