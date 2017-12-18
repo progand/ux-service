@@ -20,11 +20,13 @@
 {{#each model as |item|}}
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{#link-to 'tasks.detail' item.id class="pull-right" }}{{fa-icon 'chevron-circle-down'}}{{/link-to}}
       <h3 class="panel-title">{{#link-to 'tasks.detail' item.id}}{{item.title}}{{/link-to}}</h3>
     </div>
     <div class="panel-body">
       {{truncate item.text}}
+      <div class="text-right">
+        {{#link-to 'tasks.detail' item.id}}Read more{{/link-to}}
+      </div>
     </div>
     {{#if (or item.minAge item.maxAge)}}
       <div class="panel-footer">{{age-range item.minAge item.maxAge}} years</div>
