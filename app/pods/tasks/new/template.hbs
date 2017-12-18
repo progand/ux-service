@@ -13,15 +13,26 @@
   <div class="form-group">
     <label for="text">Text</label> {{textarea value=text class="form-control" id="text" placeholder="Text" required=true}}
   </div>
+  <div class="form-group">
+    <label for="text">Restrictions:</label>
+    <p>
+      {{#if isAgeRangeSet}}
+        <span class="badge">{{age-range minAge maxAge}} years <span {{action "resetAgeRange"}}>{{fa-icon "close"}}</span></span>
+      {{/if}}
+    </p>
+  </div>
   <div class="form-group age">
     <label for="minAge">Age range</label>
     <div class="m-b-md">
-      {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
-      -
-      {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
+      {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}} - {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
       years
     </div>
-    {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
+    <div class="m-b-md">
+      {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
+    </div>
+    <p class="help-block">
+      {{#if isAgeRangeSet}} {{age-range minAge maxAge}} years {{else}}No age restrictions{{/if}}
+    </p>
   </div>
   <div class="m-t-lg">
     <button type="submit" class="btn btn-primary">Submit task</button>

@@ -1,3 +1,4 @@
+import { computed } from '@ember/object';
 import { later } from '@ember/runloop';
 import Controller from '@ember/controller';
 
@@ -15,6 +16,10 @@ export default Controller.extend({
   },
   start: [0, AGE_LIMIT],
 
+  isAgeRangeSet: computed('minAge', 'maxAge', function(){
+    return this.get('minAge') || this.get('maxAge') < AGE_LIMIT;
+  }),
+
   actions: {
     changeAgeRange: function(value) {
       later(() => this.setProperties({
@@ -24,6 +29,10 @@ export default Controller.extend({
     },
     ageRangeDidChange(){
       later(() => this.set('start', [this.get('minAge'), this.get('maxAge')]));
+    },
+    resetAgeRange(){
+      this.actions.changeAgeRange.call(this, [0, AGE_LIMIT]);
+      this.actions.ageRangeDidChange.call(this);
     }
   }
 });
