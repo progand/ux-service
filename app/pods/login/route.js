@@ -3,6 +3,7 @@ import {
 } from '@ember/service';
 import Route from '@ember/routing/route';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
+import findRecord from 'ux-service/utils/find-record';
 
 export default Route.extend(UnauthenticatedRouteMixin, {
   session: service(),
@@ -21,13 +22,9 @@ export default Route.extend(UnauthenticatedRouteMixin, {
         providerId: providerData.providerId || 'google.com',
         other: data
       }
-      let users = await this.get('store').query('user', {
-        orderBy: 'uid',
-        startAt: userData.uid,
-        limitToFirst: 1
-      });
-      if(users.get('length') === 0){
-        const user = this.get('store').createRecord('user', userData);
+      let user = await findRecord(this.get('store'), 'user', 'uid', userData.uid);
+      if(!user){
+        user = this.get('store').createRecord('user', userData);
         await user.save();
       }
       return this.transitionTo('tasks');
