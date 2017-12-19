@@ -13,13 +13,12 @@ export default Route.extend(UnauthenticatedRouteMixin, {
     async authenticateWithGooglePlus() {
       await this.get('session').authenticate('authenticator:custom');
       const data = this.get('session.data.authenticated');
-      const providerData = data.providerData[0];
       const userData = {
-        uid: providerData.uid || data.uid,
-        email: providerData.email || data.email,
-        name: providerData.displayName || data.displayName,
-        photo: providerData.photoURL || data.photoURL,
-        providerId: providerData.providerId || 'google.com',
+        uid: data.uid,
+        email: data.email,
+        name: data.displayName,
+        photo: data.photoURL,
+        providerId: 'google.com',
         other: data
       }
       let user = await findRecord(this.get('store'), 'user', 'uid', userData.uid);

@@ -13,13 +13,25 @@
       {{/nav.item}}
     {{/navbar.nav}}
     {{#navbar.nav class="navbar-right" as |nav|}}
-      {{#nav.item}}
-        {{#if session.isAuthenticated}}
-          <a {{action 'invalidateSession'}}>{{fa-icon "sign-out"}} Logout</a>
-        {{else}}
+
+      {{#if session.isAuthenticated}}
+        {{#nav.dropdown tagName="li" class="hidden-xs" as |dd|}}
+          {{#dd.toggle}}<img src= {{model.photo}} alt="" height="18" /> {{model.name}} <span class="caret"></span>{{/dd.toggle}}
+          {{#dd.menu as |ddm|}}
+            {{#ddm.item}}
+              <a {{action 'invalidateSession'}} title="Logout">{{fa-icon "sign-out"}} Logout</a>
+            {{/ddm.item}}
+          {{/dd.menu}}
+        {{/nav.dropdown}}
+        {{#nav.item class="visible-xs"}}
+          <a {{action 'invalidateSession'}} href="#" title="Logout">{{fa-icon "sign-out"}} Logout</a>
+        {{/nav.item}}
+      {{else}}
+        {{#nav.item}}
           {{#nav.link-to "login"}}{{fa-icon "sign-in"}} Login{{/nav.link-to}}
-        {{/if}}
-      {{/nav.item}}
+        {{/nav.item}}
+      {{/if}}
+
     {{/navbar.nav}}
   {{/navbar.content}}
 {{/bs-navbar}}
