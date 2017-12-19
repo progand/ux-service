@@ -30,5 +30,9 @@ export default Route.extend(ApplicationRouteMixin, {
     await EmberPromise.resolve(this._super(...arguments));
     const user = await preloadCurrentUser.call(this);
     return user;
-  }
+  },
+
+  sessionAuthenticated: function() {
+    this.refresh();
+  },
 });
