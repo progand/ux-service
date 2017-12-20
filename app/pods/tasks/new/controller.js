@@ -15,6 +15,7 @@ export default Controller.extend({
     'max': [AGE_LIMIT]
   },
   start: [0, AGE_LIMIT],
+  isAgeRangeControlCollapsed: true,
 
   isAgeRangeSet: computed('minAge', 'maxAge', function(){
     return Number(this.get('minAge')) || this.get('maxAge') < AGE_LIMIT;

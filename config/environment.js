@@ -23,8 +23,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-    torii: {
-    },
+    torii: {},
     firebase: {
       apiKey: "AIzaSyAIkSbbzkF8TKJ4vVyo3KY_D5bI6n5UwzY",
       authDomain: "test-my-ui.firebaseapp.com",
@@ -32,6 +31,14 @@ module.exports = function(environment) {
       projectId: "test-my-ui",
       storageBucket: "test-my-ui.appspot.com",
       messagingSenderId: "355805832589"
+    },
+    // https://emberobserver.com/addons/ember-place-autocomplete
+    'place-autocomplete': {
+      exclude: false, // exclude the Google API from the page if it is already loaded in your app
+      key: 'AIzaSyCNJWcI0qrzE8hL-luvdVARvpTW9c8yhTA',
+      //client: '748085729435-loca6ip9ir7psprv463s48cr3jvmfs7a.apps.googleusercontent.com',
+      version: 3.29, // Optional - if client is set version must be above 3.24
+      language: 'en', // Optional - be default will be based on your browser language
     }
   };
 

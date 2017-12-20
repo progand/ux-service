@@ -45,6 +45,7 @@
     "ember-fetch": "^3.4.3",
     "ember-font-awesome": "^4.0.0-alpha.14",
     "ember-load-initializers": "^1.0.0",
+    "ember-place-autocomplete": "^0.0.20",
     "ember-resolver": "^4.0.0",
     "ember-simple-auth": "^1.4.0",
     "ember-source": "~2.16.0",

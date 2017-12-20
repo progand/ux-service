@@ -22,9 +22,9 @@
     </p>
   </div>
   <div class="form-group age">
-    <label for="minAge" {{action (toggle "isAgeRangeControlShown" this)}}>
-      <a href="#">{{fa-icon (if isAgeRangeControlShown "minus-circle" "plus-circle")}}</a> Age range</label>
-    {{#if isAgeRangeControlShown}}
+    <label for="minAge" {{action (toggle "isAgeRangeControlCollapsed" this)}}>
+      <a href="#">{{fa-icon (if isAgeRangeControlCollapsed "chevron-down" "chevron-up")}} Age range</a></label>
+    {{#bs-collapse collapsed=isAgeRangeControlCollapsed}}
       <div class="m-b-md">
         {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}} - {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
         years
@@ -35,7 +35,17 @@
       <p class="help-block">
         {{#if isAgeRangeSet}} {{age-range minAge maxAge}} years {{else}}No age restrictions{{/if}}
       </p>
-    {{/if}}
+    {{/bs-collapse}}
+  </div>
+  <div class="form-group">
+    <label for="country">Countries</label> {{place-autocomplete-field
+      id="country"
+      value= model.address
+      disabled=false
+      handlerController=this
+      inputClass='form-control'
+      types='(regions)'
+    }}
   </div>
   <div class="m-t-lg">
     <button type="submit" class="btn btn-primary">Submit task</button>
