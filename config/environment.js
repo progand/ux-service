@@ -35,7 +35,7 @@ module.exports = function(environment) {
     // https://emberobserver.com/addons/ember-place-autocomplete
     'place-autocomplete': {
       exclude: false, // exclude the Google API from the page if it is already loaded in your app
-      key: 'AIzaSyCNJWcI0qrzE8hL-luvdVARvpTW9c8yhTA',
+      key: 'AIzaSyAIkSbbzkF8TKJ4vVyo3KY_D5bI6n5UwzY',
       //client: '748085729435-loca6ip9ir7psprv463s48cr3jvmfs7a.apps.googleusercontent.com',
       version: 3.29, // Optional - if client is set version must be above 3.24
       language: 'en', // Optional - be default will be based on your browser language
