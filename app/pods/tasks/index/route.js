@@ -13,7 +13,7 @@ export default Route.extend({
 
   model(params) {
     return this.store.query('task', {
-      limitToFirst: params.page * 5
+      limitToLast: params.page * 4
     });
   },
 

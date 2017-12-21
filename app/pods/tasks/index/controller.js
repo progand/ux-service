@@ -15,6 +15,6 @@ export default Controller.extend({
   query: '',
 
   canShowMore: computed('page', 'model.[]', function() {
-    return this.get('model.length') >= 5 * this.get('page');
+    return this.get('model.length') >= 4 * this.get('page');
   })
 });

@@ -1,0 +1,7 @@
+.task-list-item {
+  .panel-footer {
+    span:not(:last-child) {
+      margin-right: 1.1em;
+    }
+  }
+}
