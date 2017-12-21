@@ -5,13 +5,13 @@
   <li class="active">New</li>
 </ol>
 
-<h4>New task</h4>
+<h4>New UX-testing task</h4>
 <form action="" {{action "submit" title text minAge maxAge countries on="submit"}} class="p-b-lg task-form">
   <div class="form-group">
-    <label for="title">Title</label> {{input value=title class="form-control" id="title" placeholder="Title" required=true}}
+    <label for="title">Title</label> {{input value=title class="form-control" id="title" placeholder="Write short title..." required=true}}
   </div>
   <div class="form-group">
-    <label for="text">Text</label> {{textarea value=text class="form-control" id="text" placeholder="Text" required=true}}
+    <label for="text">Instructions</label> {{textarea value=text class="form-control" id="text" placeholder="Write instruction here..." required=true}}
   </div>
   <div class="form-group">
     <h4>Restrictions:</h4>
@@ -38,21 +38,32 @@
     {{/bs-collapse}}
   </div>
   <div class="form-group">
-    <label for="country">Countries</label>
-    <ul>
-      {{#each countries as |country index|}}
-        <li>{{country}} <a href="" class="btn btn-link btn-sm text-danger" {{action "removeCountry" index}}>{{fa-icon "ban"}}</a></li>
-      {{/each}}
-      <li>{{place-autocomplete-field
-        id="country"
-        value=country
-        disabled=false
-        handlerController=this
-        placeChangedCallback='onCoutrySelected'
-        inputClass='form-control country-input'
-        types='(regions)'
-      }}</li>
-    </ul>
+    <label for="country" {{action (toggle "isCountriesControlCollapsed" this)}}>
+      <a href="#">{{fa-icon (if isCountriesControlCollapsed "chevron-down" "chevron-up")}} Countries</a>
+    </label>
+    {{#bs-collapse collapsed=isCountriesControlCollapsed}}
+      <ul>
+        {{#each countries as |country index|}}
+          <li>{{country}} <a href="" class="btn btn-link btn-sm text-danger" {{action "removeCountry" index}}>{{fa-icon "ban"}}</a></li>
+        {{/each}}
+        <li>{{place-autocomplete-field
+            id="country"
+            value=country
+            disabled=false
+            handlerController=this
+            placeChangedCallback='onCoutrySelected'
+            inputClass='form-control country-input'
+            types='(regions)'
+          }}</li>
+      </ul>
+      <p class="help-block">
+        {{#if countries.length}}
+          People from {{countries.length}} countries will be allowed to perform the test.
+        {{else}}
+          No geographic restrictions.
+        {{/if}}
+      </p>
+    {{/bs-collapse}}
   </div>
   <div class="m-t-lg">
     <button type="submit" class="btn btn-primary">Submit task</button>

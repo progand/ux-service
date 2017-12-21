@@ -1,11 +1,30 @@
 <ol class="breadcrumb">
-  <li>{{#link-to "tasks.index"}}Tasks{{/link-to}}</li>
+  <li>
+    {{#link-to "tasks.index"}}Tasks{{/link-to}}
+  </li>
   <li class="active">{{model.title}}</li>
 </ol>
 
 <div class="">
-    <h4 class="">{{model.title}}</h4>
-    <h5 class="">min: {{model.minAge}}</h5>
-    <h5 class="">max: {{model.maxAge}}</h5> 
-    <p class="">{{model.text}}</p>
+  <h4 class="">{{model.title}}</h4>
+  <div class="bg-warning p-a-md m-b-md">
+    <h5>Restrictions</h5>
+    {{#if (or model.minAge model.maxAge)}}
+      <p>
+        <strong>Age</strong>: {{age-range model.minAge model.maxAge}} years
+      </p>
+    {{/if}}
+    {{#if model.countries.length}}
+      <p>
+        <strong>Countries</strong>:
+        <ul>
+          {{#each model.countries as |country|}}
+            <li>{{fa-icon "map-marker"}} {{country}}</li>
+          {{/each}}
+        </ul>
+      </p>
+    {{/if}}
+  </div>
+  <h5>Instructions</h5>
+  <div class="">{{model.text}}</div>
 </div>
