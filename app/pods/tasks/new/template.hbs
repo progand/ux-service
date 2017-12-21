@@ -6,7 +6,7 @@
 </ol>
 
 <h4>New task</h4>
-<form action="" {{action "submit" title text minAge maxAge on="submit"}} class="p-b-lg task-form">
+<form action="" {{action "submit" title text minAge maxAge countries on="submit"}} class="p-b-lg task-form">
   <div class="form-group">
     <label for="title">Title</label> {{input value=title class="form-control" id="title" placeholder="Title" required=true}}
   </div>
@@ -38,14 +38,21 @@
     {{/bs-collapse}}
   </div>
   <div class="form-group">
-    <label for="country">Countries</label> {{place-autocomplete-field
-      id="country"
-      value= model.address
-      disabled=false
-      handlerController=this
-      inputClass='form-control'
-      types='(regions)'
-    }}
+    <label for="country">Countries</label>
+    <ul>
+      {{#each countries as |country index|}}
+        <li>{{country}} <a href="" class="btn btn-link btn-sm text-danger" {{action "removeCountry" index}}>{{fa-icon "ban"}}</a></li>
+      {{/each}}
+      <li>{{place-autocomplete-field
+        id="country"
+        value=country
+        disabled=false
+        handlerController=this
+        placeChangedCallback='onCoutrySelected'
+        inputClass='form-control country-input'
+        types='(regions)'
+      }}</li>
+    </ul>
   </div>
   <div class="m-t-lg">
     <button type="submit" class="btn btn-primary">Submit task</button>

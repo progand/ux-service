@@ -8,16 +8,19 @@ export default Route.extend({
       controller.set('text', '');
       controller.set('minAge', 0);
       controller.set('maxAge', controller.AGE_LIMIT);
+      controller.set('countries', []);
+      controller.set('country', '');
     }
   },
   actions: {
-    submit(title, text, minAge, maxAge) {
+    submit(title, text, minAge, maxAge, countries) {
       if (title && text) {
         const task = this.store.createRecord('task', {
           title,
           text,
           minAge: minAge || undefined,
-          maxAge: maxAge < this.controller.AGE_LIMIT ? maxAge : undefined
+          maxAge: maxAge < this.controller.AGE_LIMIT ? maxAge : undefined,
+          countries: countries && countries.length ? countries : undefined
         });
         task.save().then(() => this.transitionTo("tasks.index"));
       }

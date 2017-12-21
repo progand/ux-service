@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import { later } from '@ember/runloop';
 import Controller from '@ember/controller';
+import $ from 'jquery';
 
 const AGE_LIMIT = 130;
 
@@ -15,6 +16,8 @@ export default Controller.extend({
     'max': [AGE_LIMIT]
   },
   start: [0, AGE_LIMIT],
+  countries: [],
+  country: '',
   isAgeRangeControlCollapsed: true,
 
   isAgeRangeSet: computed('minAge', 'maxAge', function(){
@@ -34,6 +37,16 @@ export default Controller.extend({
     resetAgeRange(){
       this.actions.changeAgeRange.call(this, [0, AGE_LIMIT]);
       this.actions.ageRangeDidChange.call(this);
+    },
+    onCoutrySelected(){
+      later(() => {
+        this.get('countries').pushObject(this.get('country'));
+        this.set('country', '');
+        later(() => $('.task-form .country-input').focus(), 10);
+      });
+    },
+    removeCountry(index){
+      this.get('countries').removeAt(index);
     }
   }
 });
