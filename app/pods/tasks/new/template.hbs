@@ -92,7 +92,7 @@
     {{/bs-collapse}}
   </div>
   <div class="m-t-lg">
-    <button type="button" class="btn btn-primary" {{action "submit" title text minAge maxAge countries interests}}>Submit task</button>
+    {{bs-button defaultText="Submit task" class="btn btn-primary" pendingText="Wait..." resolvedText="Task added!" onClick=(action "submit" title text minAge maxAge countries interests)}}
     {{#link-to "tasks" class="btn btn-link" }}Cancel{{/link-to}}
   </div>
 </section>

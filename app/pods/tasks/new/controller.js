@@ -67,6 +67,19 @@ export default Controller.extend({
       } else {
         this.get('interests').pushObject(interest);
       }
+    },
+    async submit(title, text, minAge, maxAge, countries, interests) {
+      if (title && text) {
+        const task = this.get('store').createRecord('task', {
+          title,
+          text,
+          minAge: minAge || null,
+          maxAge: maxAge < AGE_LIMIT ? maxAge : null,
+          countries: countries && countries.length ? countries : null,
+          interests: interests && interests.length ? interests : null
+        });
+        return task.save().then(savedTask => this.transitionToRoute("tasks.detail", savedTask.id));
+      }
     }
   }
 });

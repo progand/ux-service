@@ -15,20 +15,5 @@ export default Route.extend({
       controller.set('interests', []);
       controller.set('country', '');
     }
-  },
-  actions: {
-    submit(title, text, minAge, maxAge, countries, interests) {
-      if (title && text) {
-        const task = this.store.createRecord('task', {
-          title,
-          text,
-          minAge: minAge || undefined,
-          maxAge: maxAge < this.controller.AGE_LIMIT ? maxAge : undefined,
-          countries: countries && countries.length ? countries : undefined,
-          interests: interests && interests.length ? interests : undefined
-        });
-        task.save().then(() => this.transitionTo("tasks.index"));
-      }
-    }
   }
 });
