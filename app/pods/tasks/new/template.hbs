@@ -8,10 +8,10 @@
 <h4>New UX test</h4>
 <section class="p-b-lg task-form">
   <div class="form-group">
-    <label for="title">Title</label> {{input value=title class="form-control" id="title" placeholder="Write short title..." required=true}}
+    <label for="title">Title</label> {{input value=title name="title" class="form-control" id="title" placeholder="Write short title..." required=true}}
   </div>
   <div class="form-group">
-    <label for="text">Instructions</label> {{textarea value=text class="form-control" rows="10" id="text" placeholder="Write instructions here..." required=true}}
+    <label for="text">Instructions</label> {{textarea value=text name="text" class="form-control" rows="10" id="text" placeholder="Write instructions here..." required=true}}
   </div>
   <div class="form-group age">
     <label for="minAge" {{action (toggle "isAgeRangeControlCollapsed" this)}}>
