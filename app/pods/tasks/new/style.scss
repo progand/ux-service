@@ -16,4 +16,10 @@
     height: auto;
     width: auto;
   }
+
+  .all-interests {
+    max-height: 150px;
+    overflow-y: scroll;
+    box-shadow: lightgrey 1px 1px 3px;
+  }
 }

@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="panel-footer">
+    <div class="panel-footer hidden-xs">
       {{#if (or task.minAge task.maxAge)}}
         <span>
         {{age-range task.minAge task.maxAge}} years
@@ -37,7 +37,12 @@
       {{/if}}
       {{#if task.countries.length}}
         <span>
-          {{fa-icon "map-marker"}} {{task.countries.firstObject}}
+          {{fa-icon "map-marker"}} {{task.countries.firstObject}}{{if (gt task.countries.length 2) "..."}}
+        </span>
+      {{/if}}
+      {{#if task.interests.length}}
+        <span class="pull-right">
+          {{fa-icon "exclamation-circle"}} {{task.interests.firstObject}}{{if (gt task.interests.length 2) "..."}}
         </span>
       {{/if}}
     </div>

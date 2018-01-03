@@ -6,5 +6,6 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   photo: DS.attr('string'),
   providerId: DS.attr('string'),
-  other: DS.attr()
+  other: DS.attr(),
+  interests: DS.attr()
 });

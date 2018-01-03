@@ -6,4 +6,5 @@ export default DS.Model.extend({
   minAge: DS.attr('number'),
   maxAge: DS.attr('number'),
   countries: DS.attr(),
+  interests: DS.attr()  
 });

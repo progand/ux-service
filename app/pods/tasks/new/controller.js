@@ -1,5 +1,9 @@
-import { computed } from '@ember/object';
-import { later } from '@ember/runloop';
+import {
+  computed
+} from '@ember/object';
+import {
+  later
+} from '@ember/runloop';
 import Controller from '@ember/controller';
 import $ from 'jquery';
 
@@ -18,11 +22,19 @@ export default Controller.extend({
   start: [0, AGE_LIMIT],
   countries: [],
   country: '',
+  interests: [],
   isAgeRangeControlCollapsed: true,
   isCountriesControlCollapsed: true,
+  isInterestsControlCollapsed: true,
 
-  isAgeRangeSet: computed('minAge', 'maxAge', function(){
+  isAgeRangeSet: computed('minAge', 'maxAge', function() {
     return Number(this.get('minAge')) || this.get('maxAge') < AGE_LIMIT;
+  }),
+
+  allInterests: computed('model.[]', 'interests.[]', function() {
+    return this.get('model').sortBy('name')
+      .reject(interest => this.get('interests').includes(interest.get('name')))
+      .mapBy('name');
   }),
 
   actions: {
@@ -32,22 +44,29 @@ export default Controller.extend({
         maxAge: Math.floor(value[1])
       }));
     },
-    ageRangeDidChange(){
+    ageRangeDidChange() {
       later(() => this.set('start', [this.get('minAge'), this.get('maxAge')]));
     },
-    resetAgeRange(){
+    resetAgeRange() {
       this.actions.changeAgeRange.call(this, [0, AGE_LIMIT]);
       this.actions.ageRangeDidChange.call(this);
     },
-    onCoutrySelected(){
+    onCoutrySelected() {
       later(() => {
         this.get('countries').pushObject(this.get('country'));
         this.set('country', '');
         later(() => $('.task-form .country-input').focus(), 10);
       });
     },
-    removeCountry(index){
+    removeCountry(index) {
       this.get('countries').removeAt(index);
+    },
+    toggleInterest(interest) {
+      if (this.get('interests').includes(interest)) {
+        this.get('interests').removeObject(interest);
+      } else {
+        this.get('interests').pushObject(interest);
+      }
     }
   }
 });
