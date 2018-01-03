@@ -1,0 +1,98 @@
+<ol class="breadcrumb">
+  <li>
+    {{#link-to "tasks.index"}}Tasks{{/link-to}}
+  </li>
+  <li class="active">New</li>
+</ol>
+
+<h4>New UX test</h4>
+<section class="p-b-lg task-form">
+  <div class="form-group">
+    <label for="title">Title</label> {{input value=title name="title" class="form-control" id="title" placeholder="Write short title..." required=true}}
+  </div>
+  <div class="form-group">
+    <label for="text">Instructions</label> {{textarea value=text name="text" class="form-control" rows="10" id="text" placeholder="Write instructions here..." required=true}}
+  </div>
+  <div class="form-group age">
+    <label for="minAge" {{action (toggle "isAgeRangeControlCollapsed" this)}}>
+      <a href="#">{{fa-icon (if isAgeRangeControlCollapsed "chevron-down" "chevron-up")}}
+        Age range
+        {{#if isAgeRangeSet}}<span class="badge">{{age-range minAge maxAge}}</span>{{/if}}
+      </a>
+    </label>
+    {{#bs-collapse collapsed=isAgeRangeControlCollapsed}}
+      <div class="m-b-md">
+        {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}} - {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
+        years
+      </div>
+      <div class="m-b-md">
+        {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
+      </div>
+      <p class="help-block">
+        {{#if isAgeRangeSet}} {{age-range minAge maxAge}} years {{else}}No age restrictions{{/if}}
+      </p>
+    {{/bs-collapse}}
+  </div>
+  <div class="form-group">
+    <label for="country" {{action (toggle "isCountriesControlCollapsed" this)}}>
+      <a href="#">{{fa-icon (if isCountriesControlCollapsed "chevron-down" "chevron-up")}}
+        Geography
+        {{#if countries.length}}<span class="badge">{{countries.length}}</span>{{/if}}
+      </a>
+    </label>
+    {{#bs-collapse collapsed=isCountriesControlCollapsed}}
+      <ul>
+        {{#each countries as |country index|}}
+          <li>{{country}} <a href="" class="btn btn-link btn-sm text-danger" {{action "removeCountry" index}}>{{fa-icon "ban"}}</a></li>
+        {{/each}}
+        <li>{{place-autocomplete-field
+            id="country"
+            value=country
+            disabled=false
+            handlerController=this
+            placeChangedCallback='onCoutrySelected'
+            inputClass='form-control country-input'
+            types='(regions)'
+          }}</li>
+      </ul>
+      <p class="help-block">
+        {{#if countries.length}}
+          People from {{countries.length}} locations will be allowed to perform the test.
+        {{else}}
+          No geographic restrictions.
+        {{/if}}
+      </p>
+    {{/bs-collapse}}
+  </div>
+  <div class="form-group">
+    <label for="interests" {{action (toggle "isInterestsControlCollapsed" this)}}>
+      <a href="#">{{fa-icon (if isInterestsControlCollapsed "chevron-down" "chevron-up")}}
+        Interests
+        {{#if interests.length}}<span class="badge">{{interests.length}}</span>{{/if}}
+      </a>
+    </label>
+    {{#bs-collapse collapsed=isInterestsControlCollapsed}}
+      <div>
+        {{#each interests as |interest|}}
+          <a href="" class="btn btn-link m-r-md" {{action "toggleInterest" interest}} title="remove interest">{{interest}} {{fa-icon "ban" class="text-danger"}}</a>
+        {{/each}}
+      </div>
+      <div class="all-interests list-group">
+        {{#each allInterests as |interest|}}
+          <a href="#" class="list-group-item" {{action "toggleInterest" interest}} title="add interest">{{fa-icon "plus" class="text-success"}} {{interest}}</a>
+        {{/each}}
+      </div>
+      <p class="help-block">
+        {{#if interests.length}}
+          People with {{interests.length}} interests will be allowed to perform the test.
+        {{else}}
+          No interests restrictions.
+        {{/if}}
+      </p>
+    {{/bs-collapse}}
+  </div>
+  <div class="m-t-lg">
+    {{bs-button defaultText="Submit task" class="btn btn-primary" pendingText="Wait..." resolvedText="Task added!" onClick=(action "submit" title text minAge maxAge countries interests)}}
+    {{#link-to "tasks" class="btn btn-link" }}Cancel{{/link-to}}
+  </div>
+</section>

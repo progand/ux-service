@@ -1,0 +1,42 @@
+<ol class="breadcrumb">
+  <li>
+    {{#link-to "tasks.index"}}Tasks{{/link-to}}
+  </li>
+  <li class="active">{{model.title}}</li>
+</ol>
+
+<div class="">
+  <h4 class="m-b-lg">{{model.title}}</h4>
+
+  <h5>Instructions</h5>
+  <div class="m-b-lg">{{model.text}}</div>
+
+  <div class="bg-warning p-a-md m-b-md">
+    <h5>Restrictions</h5>
+    {{#if (or model.minAge model.maxAge)}}
+      <p>
+        <strong>Age</strong>: {{age-range model.minAge model.maxAge}} years
+      </p>
+    {{/if}}
+    {{#if model.countries.length}}
+      <p>
+        <strong>Geography</strong>:
+        <ul class="list-unstyled p-l-md">
+          {{#each model.countries as |country|}}
+            <li>{{fa-icon "map-marker"}} {{country}}</li>
+          {{/each}}
+        </ul>
+      </p>
+    {{/if}}
+    {{#if model.interests.length}}
+      <p>
+        <strong>Interests</strong>:
+        <ul>
+          {{#each model.interests as |interest|}}
+            <li>{{interest}}</li>
+          {{/each}}
+        </ul>
+      </p>
+    {{/if}}
+  </div>
+</div>
