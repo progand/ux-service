@@ -11,20 +11,21 @@ module.exports = function(defaults) {
       'importBootstrapCSS': false
     },
     babel: {
-			plugins: [
-				'transform-object-rest-spread'
-			]
-		},
-    'ember-cli-image-transformer': {
-      images: [
-        {
-          inputFilename: 'lib/images/brand-icon.svg',
-          outputFileName: 'appicon-',
-          convertTo: 'png',
-          destination: 'assets/icons/',
-          sizes: [32, 192, 280, 512]
-        }
+      plugins: [
+        'transform-object-rest-spread'
       ]
+    },
+    sassOptions: {
+      includePaths: ['app']
+    },
+    'ember-cli-image-transformer': {
+      images: [{
+        inputFilename: 'lib/images/brand-icon.svg',
+        outputFileName: 'appicon-',
+        convertTo: 'png',
+        destination: 'assets/icons/',
+        sizes: [32, 192, 280, 512]
+      }]
     }
   });
 
