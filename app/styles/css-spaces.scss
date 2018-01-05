@@ -18,6 +18,14 @@
     margin-left: $style;
   }
 
+  .m-v-#{$i} {
+    @extend .m-t-#{$i}, .m-b-#{$i};
+  }
+
+  .m-h-#{$i} {
+    @extend .m-l-#{$i}, .m-r-#{$i};
+  }
+
   .m-a-#{$i} {
     margin: $style;
   }
@@ -36,6 +44,14 @@
 
   .p-l-#{$i} {
     padding-left: $style;
+  }
+
+  .p-v-#{$i} {
+    @extend .p-t-#{$i}, .p-b-#{$i};
+  }
+
+  .p-h-#{$i} {
+    @extend .p-l-#{$i}, .p-r-#{$i};
   }
 
   .p-a-#{$i} {
