@@ -15,17 +15,21 @@ export default Controller.extend({
   text: '',
   minAge: 0,
   maxAge: AGE_LIMIT,
-  range: {
-    'min': [0],
-    'max': [AGE_LIMIT]
-  },
-  start: [0, AGE_LIMIT],
-  countries: [],
   country: '',
-  interests: [],
   isAgeRangeControlCollapsed: true,
   isCountriesControlCollapsed: true,
   isInterestsControlCollapsed: true,
+
+  init() {
+    this._super(...arguments);
+    this.range = {
+      'min': [0],
+      'max': [AGE_LIMIT]
+    };
+    this.start = [0, AGE_LIMIT];
+    this.countries = [];
+    this.interests = [];
+  },
 
   isAgeRangeSet: computed('minAge', 'maxAge', function() {
     return Number(this.get('minAge')) || this.get('maxAge') < AGE_LIMIT;
