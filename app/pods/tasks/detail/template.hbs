@@ -6,12 +6,12 @@
 </ol>
 
 <div class="">
-  <h4 class="m-b-lg">{{model.title}}</h4>
+  <h4 class="m-b-3">{{model.title}}</h4>
 
   <h5>Instructions</h5>
-  <div class="m-b-lg">{{model.text}}</div>
+  <div class="m-b-3">{{model.text}}</div>
 
-  <div class="bg-warning p-a-md m-b-md">
+  <div class="bg-warning p-a-2 m-b-2">
     <h5>Restrictions</h5>
     {{#if (or model.minAge model.maxAge)}}
       <p>
@@ -21,7 +21,7 @@
     {{#if model.countries.length}}
       <p>
         <strong>Geography</strong>:
-        <ul class="list-unstyled p-l-md">
+        <ul class="list-unstyled p-l-2">
           {{#each model.countries as |country|}}
             <li>{{fa-icon "map-marker"}} {{country}}</li>
           {{/each}}
