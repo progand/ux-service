@@ -6,7 +6,7 @@
 </ol>
 
 <h4>New UX test</h4>
-<section class="p-b-lg task-form">
+<section class="p-b-3 task-form">
   <div class="form-group">
     <label for="title">Title</label> {{input value=title name="title" class="form-control" id="title" placeholder="Write short title..." required=true}}
   </div>
@@ -21,11 +21,11 @@
       </a>
     </label>
     {{#bs-collapse collapsed=isAgeRangeControlCollapsed}}
-      <div class="m-b-md">
+      <div class="m-b-2">
         {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}} - {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
         years
       </div>
-      <div class="m-b-md">
+      <div class="m-b-2">
         {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
       </div>
       <p class="help-block">
@@ -74,7 +74,7 @@
     {{#bs-collapse collapsed=isInterestsControlCollapsed}}
       <div>
         {{#each interests as |interest|}}
-          <a href="" class="btn btn-link m-r-md" {{action "toggleInterest" interest}} title="remove interest">{{interest}} {{fa-icon "ban" class="text-danger"}}</a>
+          <a href="" class="btn btn-link m-r-2" {{action "toggleInterest" interest}} title="remove interest">{{interest}} {{fa-icon "ban" class="text-danger"}}</a>
         {{/each}}
       </div>
       <div class="all-interests list-group">
@@ -91,7 +91,7 @@
       </p>
     {{/bs-collapse}}
   </div>
-  <div class="m-t-lg">
+  <div class="m-t-3">
     {{bs-button defaultText="Submit task" class="btn btn-primary" pendingText="Wait..." resolvedText="Task added!" onClick=(action "submit" title text minAge maxAge countries interests)}}
     {{#link-to "tasks" class="btn btn-link" }}Cancel{{/link-to}}
   </div>

@@ -2,19 +2,19 @@
   <li class="active">Tasks</li>
 </ol>
 
-<form class="form-inline m-b-lg" {{action (mut q) query on="submit"}}>
+<form class="form-inline m-b-3" {{action (mut q) query on="submit"}}>
   <div class="form-group">
     <label class="sr-only" for="q">Search query:</label> {{input value=query type="text" class="form-control" id="q" placeholder="Enter query here"}}
   </div>
   <button type="submit" class="btn btn-default">Search</button>
 </form>
 
-<div class="text-right m-b-lg">
+<div class="text-right m-b-3">
   {{#link-to "tasks.new" class="btn btn-primary" }}{{fa-icon "plus"}} Add task{{/link-to}}
 </div>
 
 {{#unless model.length}}
-  <div class="alert alert-info m-t-md">No tasks so far.</div>
+  <div class="alert alert-info m-t-2">No tasks so far.</div>
 {{/unless}}
 
 {{#each (reverse model) as |task|}}
@@ -50,7 +50,7 @@
 {{/each}}
 
 {{#if canShowMore}}
-  <div class="text-center m-b-lg">
+  <div class="text-center m-b-3">
     <button class="btn btn-primary" {{action "showMore"}}>Show more</button>
   </div>
 {{/if}}
