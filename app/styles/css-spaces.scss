@@ -1,0 +1,44 @@
+@for $i from 1 through 3 {
+  $size: 1rem * $i;
+  $style: $size !important;
+
+  .m-t-#{$i} {
+    margin-top: $style;
+  }
+
+  .m-r-#{$i} {
+    margin-right: $style;
+  }
+
+  .m-b-#{$i} {
+    margin-bottom: $style;
+  }
+
+  .m-l-#{$i} {
+    margin-left: $style;
+  }
+
+  .m-a-#{$i} {
+    margin: $style;
+  }
+
+  .p-t-#{$i} {
+    padding-top: $style;
+  }
+
+  .p-r-#{$i} {
+    padding-right: $style;
+  }
+
+  .p-b-#{$i} {
+    padding-bottom: $style;
+  }
+
+  .p-l-#{$i} {
+    padding-left: $style;
+  }
+
+  .p-a-#{$i} {
+    padding: $style;
+  }
+}
