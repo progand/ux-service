@@ -1,7 +1,7 @@
+import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import Controller from '@ember/controller';
 
-export default Controller.extend({
+export default Component.extend({
   session: service(),
   inverse: true,
   collapsed: true,
