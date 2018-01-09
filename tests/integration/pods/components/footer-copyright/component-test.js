@@ -11,7 +11,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{footer-copyright}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$('footer').length);
 
   // Template block usage:
   this.render(hbs`
@@ -20,5 +20,5 @@ test('it renders', function(assert) {
     {{/footer-copyright}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(this.$('footer').length);
 });
