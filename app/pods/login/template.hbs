@@ -1,4 +1,24 @@
 <div class="text-center m-v-3 p-v-3">
-  <h1>Sign in</h1>
-  <a href="#" {{action 'authenticateWithGooglePlus'}} class="btn btn-lg btn-primary">{{fa-icon "google"}} Google</a>
+  <h1>Sign in via</h1>
+  <p class="muted">Select any service to sign in with:</p>
+  {{#if error}}
+    <div class="text-danger">
+      Some errors have occured:
+      <ul class="list-unstyled">
+        {{#each error.errors as |errorItem|}}
+          <li>{{errorItem}}</li>
+        {{else}}
+          {{error}}
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  <div class="m-v-3">
+    {{bs-button class="btn btn-primary" defaultText="Google" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWithGooglePlus")}}
+  </div>
+  <p>
+    <span class="text-info">Not registered?</span>
+    <span class="text-muted">No worries, you will be registered automatically on the very first sign in.</span>
+  </p>
 </div>

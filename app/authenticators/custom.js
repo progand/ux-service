@@ -5,15 +5,31 @@ import {
   Promise as EmberPromise
 } from 'rsvp';
 import Base from 'ember-simple-auth/authenticators/base';
+import findRecord from 'ux-service/utils/find-record';
 
 export default Base.extend({
   session: service(),
   torii: service(),
 
-  authenticate() {
-    return this.get('torii').open('firebase', {
+  async authenticate(store) {
+    const authorization = await this.get('torii').open('firebase', {
       provider: 'google'
-    }).then(authorization => authorization.toJSON());
+    });
+    const data = authorization.toJSON();
+    const userData = {
+      uid: data.uid,
+      email: data.email,
+      name: data.displayName,
+      photo: data.photoURL,
+      providerId: 'google.com',
+      other: data
+    }
+    let user = await findRecord(store, 'user', 'uid', userData.uid);
+    if (!user) {
+      user = store.createRecord('user', userData);
+      await user.save();
+    }
+    return data;
   },
 
   restore(data) {
