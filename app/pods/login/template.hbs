@@ -15,7 +15,8 @@
   {{/if}}
 
   <div class="m-v-3">
-    {{bs-button class="btn btn-primary" defaultText="Google" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWithGooglePlus")}}
+    {{bs-button class="btn btn-lg btn-primary m-r-1" defaultText="Google" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "google")}}
+    {{bs-button class="btn btn-lg btn-info" defaultText="Facebook" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "facebook")}}
   </div>
   <p>
     <span class="text-info">Not registered?</span>

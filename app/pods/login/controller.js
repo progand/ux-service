@@ -9,10 +9,10 @@ export default Controller.extend({
 
   actions: {
     // action to trigger authentication with Google+
-    async authenticateWithGooglePlus() {
+    async authenticateWith(provider) {
       try {
         this.set('error', null);
-        await this.get('session').authenticate('authenticator:custom', this.get('store'));
+        await this.get('session').authenticate('authenticator:custom', this.get('store'), provider);
       } catch (err) {
         this.set('error', err);
       }

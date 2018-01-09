@@ -11,9 +11,9 @@ export default Base.extend({
   session: service(),
   torii: service(),
 
-  async authenticate(store) {
+  async authenticate(store, provider) {
     const authorization = await this.get('torii').open('firebase', {
-      provider: 'google'
+      provider
     });
     const data = authorization.toJSON();
     const userData = {
@@ -21,7 +21,7 @@ export default Base.extend({
       email: data.email,
       name: data.displayName,
       photo: data.photoURL,
-      providerId: 'google.com',
+      provider,
       other: data
     }
     let user = await findRecord(store, 'user', 'uid', userData.uid);

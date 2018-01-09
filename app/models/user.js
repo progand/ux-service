@@ -5,7 +5,7 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   name: DS.attr('string'),
   photo: DS.attr('string'),
-  providerId: DS.attr('string'),
+  provider: DS.attr('string'),
   other: DS.attr({ defaultValue: null }),
   countries: DS.attr({ defaultValue: null }),
   interests: DS.attr({ defaultValue: null })
