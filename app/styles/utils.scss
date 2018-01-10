@@ -1,0 +1,21 @@
+.btn-twitter {
+  background-color: #1da1f2;
+  border: 1px solid #1da1f2;
+
+  &:hover {
+    background-color: #1B95E0;
+    border-color: #1B95E0;
+  }
+}
+
+.btn-facebook {
+  background-color: #4267b2;
+  border-color: #4267b2;
+
+  &:hover {
+    background-color: #365899;
+    border-color: #365899;
+  }
+}
+
+.btn-google {}

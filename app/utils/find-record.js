@@ -4,5 +4,6 @@ export default async function findRecord(store, modelName, propertyName, propert
     endAt: propertyValue,
     limitToLast: 1
   });
-  return records.get('firstObject');
+  const firstObject = records.get('firstObject');
+  return firstObject.get(propertyName) === propertyValue ? firstObject : null;
 }

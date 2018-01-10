@@ -7,16 +7,25 @@
       <ul class="list-unstyled">
         {{#each error.errors as |errorItem|}}
           <li>{{errorItem}}</li>
-        {{else}}
-          {{error}}
+  {{else}}
+    {{error}}
         {{/each}}
       </ul>
     </div>
   {{/if}}
 
-  <div class="m-v-3">
-    {{bs-button class="btn btn-lg btn-primary m-r-1" defaultText="Google" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "google")}}
-    {{bs-button class="btn btn-lg btn-info" defaultText="Facebook" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "facebook")}}
+  <div class="m-v-3 container">
+    <div class="row">
+      <div class="col-sm-4 m-b-1">
+        {{bs-button class="btn-block btn btn-lg btn-facebook" defaultText="Facebook" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "facebook")}}
+      </div>
+      <div class="col-sm-4 m-b-1">
+        {{bs-button class="btn-block btn btn-lg btn-primary" defaultText="Google" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "google")}}
+      </div>
+      <div class="col-sm-4 m-b-1">
+        {{bs-button class="btn-block btn btn-lg btn-twitter" defaultText="Twitter" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "twitter")}}
+      </div>
+    </div>
   </div>
   <p>
     <span class="text-info">Not registered?</span>
