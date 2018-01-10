@@ -1,29 +1,40 @@
 <div class="text-center m-v-3 p-v-3">
   <h1>Sign in via</h1>
   <p class="muted">Select any service to sign in with:</p>
-  {{#if error}}
+
+  {{#if authenticateWithProvider.last.isError}}
     <div class="text-danger">
       Some errors have occured:
       <ul class="list-unstyled">
-        {{#each error.errors as |errorItem|}}
+        {{#each authenticateWithProvider.last.error.errors as |errorItem|}}
           <li>{{errorItem}}</li>
   {{else}}
-    {{error}}
+    {{authenticateWithProvider.last.error}}
         {{/each}}
       </ul>
     </div>
   {{/if}}
 
+  {{#if authenticateWithProvider.isRunning}}
+    <div class="text-info">Signing in...</div>
+  {{/if}}
+
   <div class="m-v-3 container">
     <div class="row">
       <div class="col-sm-4 m-b-1">
-        {{bs-button class="btn-block btn btn-lg btn-facebook" defaultText="Facebook" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "facebook")}}
+        <button class="btn-block btn btn-lg btn-facebook {{if authenticateWithProvider.isRunning 'disabled'}}" onclick= {{perform authenticateWithProvider "facebook"}}>
+            {{fa-icon "facebook"}} Facebook
+        </button>
       </div>
       <div class="col-sm-4 m-b-1">
-        {{bs-button class="btn-block btn btn-lg btn-primary" defaultText="Google" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "google")}}
+        <button class="btn-block btn btn-lg btn-primary {{if authenticateWithProvider.isRunning 'disabled'}}" onclick= {{perform authenticateWithProvider "google"}}>
+          {{fa-icon "google"}} Google
+        </button>
       </div>
       <div class="col-sm-4 m-b-1">
-        {{bs-button class="btn-block btn btn-lg btn-twitter" defaultText="Twitter" pendingText="Wait..." resolvedText="Success!" onClick=(action "authenticateWith" "twitter")}}
+        <button class="btn-block btn btn-lg btn-twitter {{if authenticateWithProvider.isRunning 'disabled'}}" onclick= {{perform authenticateWithProvider "twitter"}}>
+          {{fa-icon "twitter"}} Twitter
+        </button>
       </div>
     </div>
   </div>
