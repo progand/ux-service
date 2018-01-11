@@ -1,0 +1,25 @@
+.task-form {
+  .age {
+    input[type="number"] {
+      display: inline-block;
+      width: 5em;
+    }
+
+    .noUi-target {
+      margin: 0 16px;
+    }
+  }
+
+  .country-input {
+    display: inline-block;
+    padding: 1px 0.5em;
+    height: auto;
+    width: auto;
+  }
+
+  .all-interests {
+    max-height: 150px;
+    overflow-y: scroll;
+    box-shadow: lightgrey 1px 1px 3px;
+  }
+}
