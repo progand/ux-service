@@ -1,8 +1,8 @@
 <div class="form-group">
-  <label for="title">Title</label> {{input value=title name="title" class="form-control" id="title" placeholder="Write short title..." required=true}}
+  <label for="title">Title</label> {{input value=title name="title" class="form-control" id="title" placeholder="Write short title..." required=true disabled=submit.isRunning}}
 </div>
 <div class="form-group">
-  <label for="text">Instructions</label> {{textarea value=text name="text" class="form-control" rows="10" id="text" placeholder="Write instructions here..." required=true}}
+  <label for="text">Instructions</label> {{textarea value=text name="text" class="form-control" rows="10" id="text" placeholder="Write instructions here..." required=true disabled=submit.isRunning}}
 </div>
 <div class="form-group age">
   <label for="minAge" {{action (toggle "isAgeRangeControlCollapsed" this)}}>
@@ -13,11 +13,11 @@
   </label>
   {{#bs-collapse collapsed=isAgeRangeControlCollapsed}}
     <div class="m-b-2">
-      {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}} - {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange"}}
+      {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange" disabled=submit.isRunning}} - {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange" disabled=submit.isRunning}}
       years
     </div>
     <div class="m-b-2">
-      {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange"}}
+      {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange" disabled=submit.isRunning}}
     </div>
     <p class="help-block">
       {{#if isAgeRangeSet}} {{age-range minAge maxAge}} years {{else}}No age restrictions{{/if}}
@@ -39,7 +39,7 @@
       <li>{{place-autocomplete-field
           id="country"
           value=country
-          disabled=false
+          disabled=submit.isRunning
           handlerController=this
           placeChangedCallback='onCoutrySelected'
           inputClass='form-control country-input'
@@ -65,12 +65,12 @@
   {{#bs-collapse collapsed=isInterestsControlCollapsed}}
     <div>
       {{#each interests as |interest|}}
-        <a href="" class="btn btn-link m-r-2" {{action "toggleInterest" interest}} title="remove interest">{{interest}} {{fa-icon "ban" class="text-danger"}}</a>
+        <a href="" class="btn btn-link m-r-2 {{if submit.isRunning 'disabled'}}" {{action "toggleInterest" interest}} title="remove interest">{{interest}} {{fa-icon "ban" class="text-danger"}}</a>
       {{/each}}
     </div>
     <div class="all-interests list-group">
       {{#each availableInterests as |interest|}}
-        <a href="#" class="list-group-item" {{action "toggleInterest" interest}} title="add interest">{{fa-icon "plus" class="text-success"}} {{interest}}</a>
+        <a href="#" class="list-group-item {{if submit.isRunning 'disabled'}}" {{action "toggleInterest" interest}} title="add interest">{{fa-icon "plus" class="text-success"}} {{interest}}</a>
       {{/each}}
     </div>
     <p class="help-block">
@@ -83,6 +83,16 @@
   {{/bs-collapse}}
 </div>
 <div class="m-t-3">
-  {{bs-button defaultText="Submit task" class="btn btn-primary" pendingText="Wait..." resolvedText="Task added!" onClick=(action "submit" title text minAge maxAge countries interests)}}
-  {{#link-to "tasks" class="btn btn-link" }}Cancel{{/link-to}}
+  <button class="btn btn-primary {{if submit.isRunning 'disabled'}}" onClick= {{perform submit title text minAge maxAge countries interests}}>
+    {{#if submit.isRunning}}
+      {{fa-icon "circle-o-notch" spin=true}} Wait...
+    {{else}}
+      Submit task
+    {{/if}}
+  </button>
+  {{#if submit.isRunning}}
+    <span class="text-info m-h-2">Saving...</span>
+  {{else}}
+    {{#link-to "tasks" class="btn btn-link" }}Cancel{{/link-to}}
+  {{/if}}
 </div>

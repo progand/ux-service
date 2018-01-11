@@ -6,6 +6,9 @@ import {
   later
 } from '@ember/runloop';
 import $ from 'jquery';
+import {
+  task
+} from 'ember-concurrency';
 
 const AGE_LIMIT = 130;
 
@@ -70,24 +73,26 @@ export default Component.extend({
       this.get('countries').removeAt(index);
     },
     toggleInterest(interest) {
+      if (this.get('submit.isRunning')) return;
       if (this.get('interests').includes(interest)) {
         this.get('interests').removeObject(interest);
       } else {
         this.get('interests').pushObject(interest);
       }
-    },
-    submit(title, text, minAge, maxAge, countries, interests) {
-      if (title && text) {
-        const taskData = {
-          title,
-          text,
-          minAge: minAge || null,
-          maxAge: maxAge < AGE_LIMIT ? maxAge : null,
-          countries: countries && countries.length ? countries : null,
-          interests: interests && interests.length ? interests : null
-        };
-        return this.get('onSubmit')(taskData);
-      }
     }
-  }
+  },
+
+  submit: task(function*(title, text, minAge, maxAge, countries, interests) {
+    if (title && text) {
+      const taskData = {
+        title,
+        text,
+        minAge: minAge || null,
+        maxAge: maxAge < AGE_LIMIT ? maxAge : null,
+        countries: countries && countries.length ? countries : null,
+        interests: interests && interests.length ? interests : null
+      };
+      return yield this.get('onSubmit')(taskData);
+    }
+  }).drop()
 });
