@@ -1,0 +1,89 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li>
+      {{#link-to "tasks.index"}}Home{{/link-to}}
+    </li>
+    <li class="active">Profile</li>
+  </ol>
+
+  <h4 class="m-v-4">{{model.name}}</h4>
+
+  {{#unless (v-get model 'isValid')}}
+    <div class="alert alert-warning">{{fa-icon "exclamation-triangle"}} Please, fill out and save your profile data before proceed.</div>
+  {{/unless}}
+
+  <div class="form-group {{unless (v-get model 'age' 'isValid') 'has-warning' 'has-success'}}">
+    <label class="control-label" for="age">Your Age
+      {{#if (v-get model 'age' 'isValid')}}
+        {{fa-icon "check" size=1 class="m-l-1 pull-right" ariaLabel="Age is correct"}}
+      {{/if}}
+    </label> {{input id="age" value=model.age  type="number" min="1" max=130 name="age" class="form-control" placeholder="Enter your age..." required=true disabled=submit.isRunning aria-describedby="age-help-block"}}
+    {{#unless (v-get model 'age' 'isValid')}}
+      <p id="age-help-block" class="help-block">{{v-get model 'age' 'message'}}</p>
+    {{/unless}}
+  </div>
+
+  <div class="form-group {{unless (v-get model 'country' 'isValid') 'has-warning' 'has-success'}}">
+    <label class="control-label" for="country">Where do you live
+      {{#if (v-get model 'country' 'isValid')}}
+        {{fa-icon "check" size=1 class="m-l-1 pull-right" ariaLabel="Location is correct"}}
+      {{/if}}
+    </label> {{place-autocomplete-field
+        id="country"
+        value=model.country
+        disabled=submit.isRunning
+        handlerController=this
+        inputClass='form-control country-input'
+        types='(regions)'
+      }}
+    {{#unless (v-get model 'country' 'isValid')}}
+      <p id="country-help-block" class="help-block">{{v-get model 'age' 'message'}}</p>
+    {{/unless}}
+  </div>
+
+  <div class="form-group {{unless (v-get model 'interests' 'isValid') 'has-warning' 'has-success'}}">
+    <label class="control-label">Interests
+      {{#if (v-get model 'interests' 'isValid')}}
+        {{fa-icon "check" size=1 class="m-l-1 pull-right" ariaLabel="Interests are correct"}}
+      {{/if}}
+    </label>
+
+    <p>
+      {{#if model.interests.length}}
+        Selected:
+        {{#each model.interests as |interest|}}
+          <a href="" class="btn btn-link m-r-1 {{if submit.isRunning 'disabled'}}" {{action "toggleInterest" interest}} title="remove interest">{{interest}} {{fa-icon "ban" class="text-danger"}}</a>
+        {{/each}}
+      {{else}}
+        You have no interests.
+      {{/if}}
+    </p>
+
+    <div class="all-interests list-group">
+      {{#each availableInterests as |interest|}}
+        <a href="#" class="list-group-item {{if submit.isRunning 'disabled'}}" {{action "toggleInterest" interest}} title="add interest">{{fa-icon "plus" class="text-success"}} {{interest}}</a>
+      {{/each}}
+    </div>
+    {{#unless (v-get model 'interests' 'isValid')}}
+      <p id="interests-help-block" class="help-block">{{v-get model 'interests' 'message'}}</p>
+    {{/unless}}
+  </div>
+
+  <div class="m-t-3">
+    <button class="btn btn-primary {{if submit.isRunning 'disabled'}} {{unless (v-get model 'isValid') 'disabled'}} {{unless model.hasDirtyAttributes 'disabled'}}" onClick= {{perform submit}}>
+      {{#if submit.isRunning}}
+        {{fa-icon "circle-o-notch" spin=true}} Wait...
+      {{else}}
+        {{fa-icon "save"}} Save profile
+      {{/if}}
+    </button>
+    {{#if submit.isRunning}}
+      <span class="text-info m-h-2">Saving...</span>
+    {{/if}}
+    {{#if submit.last.isSuccessful}}
+      <span class="text-success m-h-2">Saved</span>
+    {{/if}}
+  </div>
+
+
+</div>

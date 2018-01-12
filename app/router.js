@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('new');
     this.route('detail', {path: 'detail/:item_id'});
   });
+  this.route('me');
 });
 
 export default Router;

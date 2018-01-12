@@ -18,11 +18,16 @@
           {{#dd.toggle}}<img src= {{model.photo}} alt="" height="18" /> {{model.name}} <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
             {{#ddm.item}}
+              {{#ddm.link-to "me"}}{{fa-icon "user"}} Profile{{/ddm.link-to}}
+            {{/ddm.item}}
+            {{ddm.divider}}
+            {{#ddm.item}}
               <a {{action 'invalidateSession'}} title="Logout">{{fa-icon "sign-out"}} Logout</a>
             {{/ddm.item}}
           {{/dd.menu}}
         {{/nav.dropdown}}
         {{#nav.item class="visible-xs" }}
+          {{#nav.link-to "me"}}{{fa-icon "user"}} Profile{{/nav.link-to}}
           <a {{action 'invalidateSession'}} href="#" title="Logout">{{fa-icon "sign-out"}} Logout</a>
         {{/nav.item}}
       {{else}}
