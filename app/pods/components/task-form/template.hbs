@@ -1,26 +1,46 @@
-<div class="form-group">
-  <label for="title">Title</label> {{input value=title name="title" class="form-control" id="title" placeholder="Write short title..." required=true disabled=submit.isRunning}}
+<div class="form-group {{if model.isTitleValidationSucceeds 'has-success'}} {{if model.isTitleValidationFails  'has-warning'}}">
+  <label class="control-label" for="title">
+    Title
+    {{#if model.isTitleValidationSucceeds}}
+      {{fa-icon "check" size=1 class="m-l-1 pull-right" ariaLabel="Title is correct"}}
+    {{/if}}
+  </label> {{input id="title" value=model.title name="title" class="form-control" placeholder="Write short title..." required=true disabled=submit.isRunning aria-describedby="title-help-block"}}
+  {{#if model.isTitleValidationFails}}
+    <p id="title-help-block" class="help-block">{{v-get model 'title' 'message'}}</p>
+  {{/if}}
 </div>
-<div class="form-group">
-  <label for="text">Instructions</label> {{textarea value=text name="text" class="form-control" rows="10" id="text" placeholder="Write instructions here..." required=true disabled=submit.isRunning}}
+{{model.attributes}}
+<div class="form-group  {{if model.isTextChanged (if model.isTextValid 'has-success' 'has-warning') }}">
+  <label class="control-label" for="text">
+    Instructions
+    {{#if model.isTextValidationSucceeds}}
+      {{fa-icon "check" size=1 class="m-l-1 pull-right" ariaLabel="Title is correct"}}
+    {{/if}}
+  </label> {{textarea id="text" value=model.text name="text" class="form-control" rows="10" placeholder="Write instructions here..." required=true disabled=submit.isRunning aria-describedby="text-help-block"}}
+  {{#if model.isTextValidationFails}}
+    <p id="text-help-block" class="help-block">{{v-get model 'text' 'message'}}</p>
+  {{/if}}
 </div>
 <div class="form-group age">
   <label for="minAge" {{action (toggle "isAgeRangeControlCollapsed" this)}}>
     <a href="#">{{fa-icon (if isAgeRangeControlCollapsed "chevron-down" "chevron-up")}}
       Age range
-      {{#if isAgeRangeSet}}<span class="badge">{{age-range minAge maxAge}}</span>{{/if}}
+      {{#if isAgeRangeSet}}<span class="badge">{{age-range model.minAge model.maxAge}}</span>{{/if}}
     </a>
   </label>
   {{#bs-collapse collapsed=isAgeRangeControlCollapsed}}
     <div class="m-b-2">
-      {{input value=minAge type="number" class="form-control" id="minAge" placeholder="min age" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange" disabled=submit.isRunning}} - {{input value=maxAge type="number" class="form-control" id="max age" placeholder="100" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange" disabled=submit.isRunning}}
+      {{input  id="minAge" value=model.minAge type="number" class="form-control" placeholder="0" min="0" max=AGE_LIMIT focus-out="ageRangeDidChange" disabled=submit.isRunning}} - {{input id="maxAge" value=model.maxAge type="number" class="form-control" placeholder=AGE_LIMIT min="0" max=AGE_LIMIT focus-out="ageRangeDidChange" disabled=submit.isRunning}}
       years
+      {{#if isAgeRangeSet}}
+        <button class="btn btn-link" {{action "resetAgeRange"}}>reset</button>
+      {{/if}}
     </div>
     <div class="m-b-2">
       {{range-slider start=start range=range connect=true step=1 on-slide="changeAgeRange" disabled=submit.isRunning}}
     </div>
     <p class="help-block">
-      {{#if isAgeRangeSet}} {{age-range minAge maxAge}} years {{else}}No age restrictions{{/if}}
+      {{#if isAgeRangeSet}} {{age-range model.minAge model.maxAge}} years {{else}}No age restrictions{{/if}}
     </p>
   {{/bs-collapse}}
 </div>
@@ -28,12 +48,12 @@
   <label for="country" {{action (toggle "isCountriesControlCollapsed" this)}}>
     <a href="#">{{fa-icon (if isCountriesControlCollapsed "chevron-down" "chevron-up")}}
       Geography
-      {{#if countries.length}}<span class="badge">{{countries.length}}</span>{{/if}}
+      {{#if model.countries.length}}<span class="badge">{{model.countries.length}}</span>{{/if}}
     </a>
   </label>
   {{#bs-collapse collapsed=isCountriesControlCollapsed}}
     <ul>
-      {{#each countries as |country index|}}
+      {{#each model.countries as |country index|}}
         <li>{{country}} <a href="" class="btn btn-link btn-sm text-danger" {{action "removeCountry" index}}>{{fa-icon "ban"}}</a></li>
       {{/each}}
       <li>{{place-autocomplete-field
@@ -47,8 +67,8 @@
         }}</li>
     </ul>
     <p class="help-block">
-      {{#if countries.length}}
-        People from {{countries.length}} locations will be allowed to perform the test.
+      {{#if model.countries.length}}
+        People from {{model.countries.length}} locations will be allowed to perform the test.
       {{else}}
         No geographic restrictions.
       {{/if}}
@@ -59,12 +79,12 @@
   <label for="interests" {{action (toggle "isInterestsControlCollapsed" this)}}>
     <a href="#">{{fa-icon (if isInterestsControlCollapsed "chevron-down" "chevron-up")}}
       Interests
-      {{#if interests.length}}<span class="badge">{{interests.length}}</span>{{/if}}
+      {{#if model.interests.length}}<span class="badge">{{model.interests.length}}</span>{{/if}}
     </a>
   </label>
   {{#bs-collapse collapsed=isInterestsControlCollapsed}}
     <div>
-      {{#each interests as |interest|}}
+      {{#each model.interests as |interest|}}
         <a href="" class="btn btn-link m-r-2 {{if submit.isRunning 'disabled'}}" {{action "toggleInterest" interest}} title="remove interest">{{interest}} {{fa-icon "ban" class="text-danger"}}</a>
       {{/each}}
     </div>
@@ -74,8 +94,8 @@
       {{/each}}
     </div>
     <p class="help-block">
-      {{#if interests.length}}
-        People with {{interests.length}} interests will be allowed to perform the test.
+      {{#if model.interests.length}}
+        People with {{model.interests.length}} interests will be allowed to perform the test.
       {{else}}
         No interests restrictions.
       {{/if}}
@@ -83,7 +103,7 @@
   {{/bs-collapse}}
 </div>
 <div class="m-t-3">
-  <button class="btn btn-primary {{if submit.isRunning 'disabled'}}" onClick= {{perform submit title text minAge maxAge countries interests}}>
+  <button class="btn btn-primary {{if submit.isRunning 'disabled'}} {{unless (v-get model 'isValid') 'disabled'}}" onClick= {{perform submit}}>
     {{#if submit.isRunning}}
       {{fa-icon "circle-o-notch" spin=true}} Wait...
     {{else}}

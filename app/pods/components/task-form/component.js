@@ -14,11 +14,8 @@ const AGE_LIMIT = 130;
 
 export default Component.extend({
   classNames: ['task-form'],
+  model: null,
   AGE_LIMIT,
-  title: '',
-  text: '',
-  minAge: 0,
-  maxAge: AGE_LIMIT,
   country: '',
   isAgeRangeControlCollapsed: true,
   isCountriesControlCollapsed: true,
@@ -33,30 +30,35 @@ export default Component.extend({
       'max': [AGE_LIMIT]
     };
     this.start = [0, AGE_LIMIT];
-    this.countries = [];
-    this.interests = [];
-    this.allInterests = this.allInterests || [];
+    this.allInterests = [];
+    if(this.get('store')){
+      this.get('store').findAll('interest').then(allInterests => this.set('allInterests', allInterests));
+    }    
   },
 
-  isAgeRangeSet: computed('minAge', 'maxAge', function() {
-    return Number(this.get('minAge')) || this.get('maxAge') < AGE_LIMIT;
+  isAgeRangeSet: computed('model.{minAge,maxAge}', function() {
+    return Number(this.get('model.minAge')) || this.get('model.maxAge') < AGE_LIMIT;
   }),
 
-  availableInterests: computed('allInterests.[]', 'interests.[]', function() {
+  availableInterests: computed('allInterests.[]', 'model.interests.[]', function() {
     return this.get('allInterests').sortBy('name')
-      .reject(interest => this.get('interests').includes(interest.get('name')))
+      .reject(interest => this.get('model.interests').includes(interest.get('name')))
       .mapBy('name');
+  }),
+
+  changedModelAttributes: computed('model.{title,text}', function() {
+    return this.get('model').changedAttributes();
   }),
 
   actions: {
     changeAgeRange: function(value) {
-      later(() => this.setProperties({
+      later(() => this.get('model').setProperties({
         minAge: Math.floor(value[0]),
         maxAge: Math.floor(value[1])
       }));
     },
     ageRangeDidChange() {
-      later(() => this.set('start', [this.get('minAge'), this.get('maxAge')]));
+      later(() => this.set('start', [this.get('model.minAge'), this.get('model.maxAge')]));
     },
     resetAgeRange() {
       this.actions.changeAgeRange.call(this, [0, AGE_LIMIT]);
@@ -64,35 +66,32 @@ export default Component.extend({
     },
     onCoutrySelected() {
       later(() => {
-        this.get('countries').pushObject(this.get('country'));
+        this.get('model.countries').pushObject(this.get('country'));
         this.set('country', '');
         later(() => $('.task-form .country-input').focus(), 10);
       });
     },
     removeCountry(index) {
-      this.get('countries').removeAt(index);
+      this.get('model.countries').removeAt(index);
     },
     toggleInterest(interest) {
       if (this.get('submit.isRunning')) return;
-      if (this.get('interests').includes(interest)) {
-        this.get('interests').removeObject(interest);
+      if (this.get('model.interests').includes(interest)) {
+        this.get('model.interests').removeObject(interest);
       } else {
-        this.get('interests').pushObject(interest);
+        this.get('model.interests').pushObject(interest);
       }
     }
   },
 
-  submit: task(function*(title, text, minAge, maxAge, countries, interests) {
-    if (title && text) {
-      const taskData = {
-        title,
-        text,
-        minAge: minAge || null,
-        maxAge: maxAge < AGE_LIMIT ? maxAge : null,
-        countries: countries && countries.length ? countries : null,
-        interests: interests && interests.length ? interests : null
-      };
-      return yield this.get('onSubmit')(taskData);
+  submit: task(function*() {
+    const model = this.get('model');
+    if (this.get('model.validations.isValid')) {
+      model.setProperties({
+        minAge: this.get('model.minAge') || null,
+        maxAge: this.get('model.maxAge') < AGE_LIMIT ? this.get('model.maxAge') : null,
+      });
+      return yield this.get('onSubmit')(model);
     }
   }).drop()
 });
