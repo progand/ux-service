@@ -18,7 +18,9 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('allInterests', []);
     if(this.get('store')){
-      this.get('store').findAll('interest').then(allInterests => this.set('allInterests', allInterests));
+      this.get('store').findAll('interest')
+        .then(allInterests => this.set('allInterests', allInterests))
+        .catch(() => {});
     }
   },
 
